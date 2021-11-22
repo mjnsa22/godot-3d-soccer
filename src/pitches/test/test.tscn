@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/pitches/test/field.gd" type="Script" id=2]
+[ext_resource path="res://src/ball/ball.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.247059, 0.407843, 0.0862745, 1 )
+
+[node name="Field" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.07957, 0 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox" parent="CSGCombiner"]
+width = 100.0
+depth = 100.0
+material = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 11, 0 )
+height = 20.0
+depth = 100.0
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 11, 0 )
+height = 20.0
+depth = 100.0
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 50 )
+width = 100.0
+height = 20.0
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -50 )
+width = 100.0
+height = 20.0
+
+[node name="Ball" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.27867, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
